@@ -1,7 +1,7 @@
 Geliştirme aşamasında oyüzden menülere fazla önem verilmemiştir.  
 yakın zamanda düzeltilecek.    
 
-Esp32-EvilTwinWifiSifresi-EvilTwin-nstagram-WifiDoS-WifiSpam-Turkce  
+Esp32-EvilTwinWifiSifresi-EvilTwin-Instagram-WifiDoS-WifiSpam-Turkce  
 
 
 
