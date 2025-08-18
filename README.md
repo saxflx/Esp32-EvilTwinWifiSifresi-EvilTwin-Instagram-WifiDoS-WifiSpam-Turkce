@@ -1,7 +1,9 @@
+Geliştirme aşamasında oyüzden menülere fazla önem verilmemiştir.  
+yakın zamanda düzeltilecek.    
+
 <img width="1900" height="909" alt="Ekran görüntüsü_2025-08-18_17-39-41" src="https://github.com/user-attachments/assets/ed92a38d-af9b-4275-8c58-a563539ab78c" /># Esp32-EvilTwinWifiSifresi-EvilTwin-nstagram-WifiDoS-WifiSpam-Turkce  
 
-Geliştirme aşamasında oyüzden menülere fazla önem verilmemiştir.  
-yakın zamanda düzeltilecek.  
+
 
 
   <img width="1900" height="909" alt="Ekran görüntüsü_2025-08-18_17-39-41" src="https://github.com/user-attachments/assets/c3300088-5bca-4ad0-aadc-1a1b766a7873" />  
