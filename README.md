@@ -3,6 +3,9 @@ yakın zamanda düzeltilecek.
 
 Esp32-EvilTwinWifiSifresi-EvilTwin-Instagram-WifiDoS-WifiSpam-Turkce  
 
+  WiFi : Esp32  
+  Şifre : 128milyar  
+
 
 
 
