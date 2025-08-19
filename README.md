@@ -1,10 +1,12 @@
-Geliştirme aşamasında oyüzden menülere fazla önem verilmemiştir.  
-yakın zamanda düzeltilecek.    
+Geliştirme aşamasında.  
+    
 
 Esp32-EvilTwinWifiSifresi-EvilTwin-Instagram-WifiDoS-WifiSpam-Turkce  
 
   WiFi : Esp32  
   Şifre : 128milyar  
+
+Şuan Wifi Deauth yoktur.
 
 
 
@@ -24,4 +26,4 @@ Esp32-EvilTwinWifiSifresi-EvilTwin-Instagram-WifiDoS-WifiSpam-Turkce
 
 
 
-  Sahte AP oluşturarak Wifi ve İnstagram şifrelerini çalmayı hedefler.  Eğitim amaçlıdır sorumululuk kabul etmiyorum.
+  Sahte AP oluşturarak Wifi ve İnstagram şifrelerini çalmayı hedefler. Wİfi spam yapabilirsiniz. Eğitim amaçlıdır sorumululuk kabul etmiyorum.
