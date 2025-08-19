@@ -12,7 +12,8 @@ Esp32-EvilTwinWifiSifresi-EvilTwin-Instagram-WifiDoS-WifiSpam-Turkce
 <img width="278" height="606" alt="image" src="https://github.com/user-attachments/assets/1abc2a29-489f-485b-a1e1-a5ccc03a992a" />  
 <img width="273" height="599" alt="image" src="https://github.com/user-attachments/assets/f7f6e422-a8da-4e8c-8f88-30fc2c91f224" />  
 <img width="280" height="579" alt="image" src="https://github.com/user-attachments/assets/155e9c4f-36c8-4f06-9f77-aa5ccd8a37c8" />  
-<img width="288" height="294" alt="image" src="https://github.com/user-attachments/assets/72c68ab1-f674-4948-866a-983991d6509b" />  
+<img width="419" height="889" alt="image" src="https://github.com/user-attachments/assets/1d719fe2-aafd-4893-a72d-a103872e7e14" />  
+
 
 
 
