@@ -30,4 +30,4 @@ Esp32-EvilTwinWifiSifresi-EvilTwin-Instagram-WifiDoS-WifiSpam-Turkce
 
 
 
-  Sahte AP oluşturarak Wifi ve İnstagram şifrelerini çalmayı hedefler. Wİfi spam yapabilirsiniz. Eğitim amaçlıdır sorumululuk kabul etmiyorum.
+  Sahte AP oluşturarak Wifi ve İnstagram şifrelerini çalmayı hedefler. Wifi spam yapabilirsiniz. Eğitim amaçlıdır sorumululuk kabul etmiyorum.
