@@ -8,16 +8,19 @@ Esp32-EvilTwinWifiSifresi-EvilTwin-Instagram-WifiDoS-WifiSpam-Turkce
 
 Şuan Wifi Deauth yoktur.
 
+<img width="578" height="665" alt="image" src="https://github.com/user-attachments/assets/d3dfb88f-223f-47b1-a017-c7c93091173e" />  
+<img width="278" height="606" alt="image" src="https://github.com/user-attachments/assets/1abc2a29-489f-485b-a1e1-a5ccc03a992a" />  
+<img width="273" height="599" alt="image" src="https://github.com/user-attachments/assets/f7f6e422-a8da-4e8c-8f88-30fc2c91f224" />  
+<img width="280" height="579" alt="image" src="https://github.com/user-attachments/assets/155e9c4f-36c8-4f06-9f77-aa5ccd8a37c8" />  
+<img width="288" height="294" alt="image" src="https://github.com/user-attachments/assets/72c68ab1-f674-4948-866a-983991d6509b" />  
 
 
 
-<img width="1900" height="909" alt="Ekran görüntüsü_2025-08-18_17-39-41" src="https://github.com/user-attachments/assets/c3300088-5bca-4ad0-aadc-1a1b766a7873" /> 
-<img width="1920" height="921" alt="Untitled design" src="https://github.com/user-attachments/assets/0a5ff0d3-d407-4f47-9dac-9ff3bcb89420" />  
-<img width="1920" height="1080" alt="Ekran görüntüsü_2025-08-18_17-34-17" src="https://github.com/user-attachments/assets/f81481f7-4a89-406d-ac49-95679caf12de" />  
-<img width="371" height="623" alt="image" src="https://github.com/user-attachments/assets/9c77a2c3-931d-47e5-8247-901477d5c3e5" />
-<img width="280" height="611" alt="image" src="https://github.com/user-attachments/assets/a802f1ac-e35c-4f81-8f11-6031cb7a9f71" />
 
-<img width="283" height="582" alt="image" src="https://github.com/user-attachments/assets/141d839a-c76f-4fd5-ad95-5e014371c735" />
+
+
+
+
 
 
 
