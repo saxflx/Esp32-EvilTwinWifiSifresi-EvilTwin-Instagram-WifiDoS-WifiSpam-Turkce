@@ -1,5 +1,5 @@
 Geliştirme aşamasında.  
-    
+  https://www.turkhackteam.org/konular/esp32-hack-tool-kurulumu.2075365/ Kurulum    
 
 Esp32-EvilTwinWifiSifresi-EvilTwin-Instagram-WifiDoS-WifiSpam-Turkce  
 
